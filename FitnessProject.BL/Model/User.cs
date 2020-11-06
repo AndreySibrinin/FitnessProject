@@ -19,12 +19,12 @@ namespace FitnessProject.BL.Model
 		/// <summary>
 		/// Gender.
 		/// </summary>
-		public Gender Gender { get; }
+		public Gender Gender { get; set; }
 
 		/// <summary>
 		/// Date birth.
 		/// </summary>
-		public DateTime BirthDate { get; }
+		public DateTime BirthDate { get; set; }
 
 		/// <summary>
 		/// Weight.
@@ -37,6 +37,7 @@ namespace FitnessProject.BL.Model
 		public double Height { get; set; }
 		#endregion
 
+		public int Age { get { return DateTime.Now.Year - BirthDate.Year;}}
 		/// <summary>
 		/// Create new User.
 		/// </summary>
@@ -86,9 +87,19 @@ namespace FitnessProject.BL.Model
 			Height = height;
 		}
 
+		public User(string name)
+		{
+			if(string.IsNullOrWhiteSpace(name))
+			{
+				throw new ArgumentNullException("User name can not be void", nameof(name));
+			}
+
+			Name = name;
+		}
+
 		public override string ToString()
 		{
-			return Name;
+			return Name + " " + Age;
 		}
 
 
